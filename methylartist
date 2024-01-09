@@ -682,7 +682,8 @@ def bam_pileupcover(bam_fn, chrom, w_starts, w_ends, procs=1, log=False):
     return cover
     
 
-def mods_methbam(bam_fn):
+#def mods_methbam(bam_fn):
+def mods_methbam(bam_fn, current_mod):
     bam = pysam.AlignmentFile(bam_fn)
 
     logger.info('fetching mod types from %s, if this takes awhile MM/ML tags may be missing.' % bam_fn)
@@ -725,11 +726,21 @@ def mods_methbam(bam_fn):
 
             mods.append(mod_type)
 
-        mods = list(set(mods))
+            if current_mod in mods:
+                # GF
+                mod_found = 1
+                # GF
+                break
+        # GF
+        if mod_found == 1:
+            # GF
+            break
 
-        logger.info('found mods: %s' % ','.join(mods))
+    mods = list(set(mods))
 
-        return mods # assumes all mods are represented for each read that has an Mm tag
+    logger.info('found mods: %s' % ','.join(mods))
+
+    return mods # assumes all mods are represented for each read that has an Mm tag
 
     if not mods:
         logger.warning('no mods found in %s, missing MM/ML tags?' % bam_fn)
@@ -2921,7 +2932,10 @@ def locus(args):
 
     for bam, meth_dbs in data.items():
         if meth_dbs is None:
-            mods = mods_methbam(bam)
+            # GF
+            # mods = mods_methbam(bam)
+            # GF
+            mods = mods_methbam(bam, args.mods)
             logger.info('found mods: %s in bam %s' % (','.join(mods), bam))
 
         else:
