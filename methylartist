@@ -1789,7 +1789,7 @@ def scoredist(args):
 
         if None in (args.ref, args.motif):
             logger.warning('--ref and --motif are required when using --bams')
-            sys.exit(1)
+            #sys.exit(1)
 
         for bam in args.bam.split(','):
             meth_cutoffs.append(0.8)
@@ -2390,7 +2390,7 @@ def segmeth(args):
     if args.bams is not None:
         if None in (args.ref, args.motif):
             logger.warning('--ref and --motif are required when using --bams')
-            sys.exit(1)
+            #sys.exit(1)
 
         methbam = True
         bams = []
@@ -2411,8 +2411,8 @@ def segmeth(args):
             if ':' in bam:
                 bam, _ = bam.split(':')
 
-            if not os.path.exists(bam+'.bai') or os.path.exists(bam+'.csi'):
-                sys.exit('bam not indexed: %s' % bam)
+            if not os.path.exists(bam+'.bai') and not os.path.exists(bam+'.csi'):
+                sys.exit('1 bam not indexed: %s' % bam)
 
             data[bam] = None
 
@@ -2875,7 +2875,7 @@ def locus(args):
 
         if None in (args.ref, args.motif):
             logger.warning('--ref and --motif are required when using --bams')
-            sys.exit(1)
+            #sys.exit(1)
 
         methbam = True
         bams = []
@@ -2904,8 +2904,8 @@ def locus(args):
                 bam, ucol = bam.split(':')
                 user_colours[bam] = ucol
 
-            if not os.path.exists(bam+'.bai') or os.path.exists(bam+'.csi'):
-                sys.exit('bam not indexed: %s' % bam)
+            if not os.path.exists(bam+'.bai') and not os.path.exists(bam+'.csi'):
+                sys.exit('2 bam not indexed: %s' % bam)
 
             data[bam] = None
 
@@ -3989,8 +3989,8 @@ def region(args):
                 bam, ucol = bam.split(':')
                 user_colours[bam] = ucol
 
-            if not os.path.exists(bam+'.bai') or os.path.exists(bam+'.csi'):
-                sys.exit('bam not indexed: %s' % bam)
+            if not os.path.exists(bam+'.bai') and not os.path.exists(bam+'.csi'):
+                sys.exit('3 bam not indexed: %s' % bam)
 
             data[bam] = None
 
@@ -4832,8 +4832,8 @@ def composite(args):
             if ':' in bam:
                 bam, _ = bam.split(':')
 
-            if not os.path.exists(bam+'.bai') or os.path.exists(bam+'.csi'):
-                sys.exit('bam not indexed: %s' % bam)
+            if not os.path.exists(bam+'.bai') and not os.path.exists(bam+'.csi'):
+                sys.exit('4 bam not indexed: %s' % bam)
 
             data[bam] = None
 
