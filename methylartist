@@ -2411,7 +2411,7 @@ def segmeth(args):
             if ':' in bam:
                 bam, _ = bam.split(':')
 
-            if not os.path.exists(bam+'.bai'):
+            if not os.path.exists(bam+'.bai') or os.path.exists(bam+'.csi'):
                 sys.exit('bam not indexed: %s' % bam)
 
             data[bam] = None
@@ -2904,7 +2904,7 @@ def locus(args):
                 bam, ucol = bam.split(':')
                 user_colours[bam] = ucol
 
-            if not os.path.exists(bam+'.bai'):
+            if not os.path.exists(bam+'.bai') or os.path.exists(bam+'.csi'):
                 sys.exit('bam not indexed: %s' % bam)
 
             data[bam] = None
@@ -3989,7 +3989,7 @@ def region(args):
                 bam, ucol = bam.split(':')
                 user_colours[bam] = ucol
 
-            if not os.path.exists(bam+'.bai'):
+            if not os.path.exists(bam+'.bai') or os.path.exists(bam+'.csi'):
                 sys.exit('bam not indexed: %s' % bam)
 
             data[bam] = None
@@ -4832,7 +4832,7 @@ def composite(args):
             if ':' in bam:
                 bam, _ = bam.split(':')
 
-            if not os.path.exists(bam+'.bai'):
+            if not os.path.exists(bam+'.bai') or os.path.exists(bam+'.csi'):
                 sys.exit('bam not indexed: %s' % bam)
 
             data[bam] = None
